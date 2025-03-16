@@ -1,14 +1,38 @@
 function Nav() {
-    return <nav>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Menu</a></li>
-            <li><a href="">Reservations</a></li>
-            <li><a href="">Order Online</a></li>
-            <li><a href="">Login</a></li>
-        </ul>
-    </nav>;
+  return (
+    <nav className="nav nav-fill">
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          Home
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          About
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          Menu
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          Reservations
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          Order Online
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="">
+          Login
+        </a>
+      </li>
+    </nav>
+  );
 }
 
 export default Nav;
