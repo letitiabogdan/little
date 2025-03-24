@@ -1,28 +1,14 @@
 import "./App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import BookTable from "./pages/BookTable";
 
 function App() {
   return (
-    <>
-      <meta
-        name="description"
-        content="Little Lemon Restaurant website description"
-      />
-      <meta name="og:title" content="Little Lemon Restaurant" />
-      <meta
-        name="og:description"
-        content="Little Lemon Restaurant website description"
-      />
-      <meta name="og:image" content="./assets/img/logo.jpg" />
-
-      <div className="container">
-        <Header></Header>
-        <Main></Main>
-        <Footer></Footer>
-      </div>
-    </>
+    <Routes>
+      <Route path="*" element={<HomePage />} />
+      <Route path="/BookTable" element={<BookTable />} />
+    </Routes>
   );
 }
 

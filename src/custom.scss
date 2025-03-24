@@ -1,0 +1,236 @@
+// scss-docs-start import-stack
+// Configuration
+
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Markazi+Text:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "~bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// Custom font setup
+$primary1: #495e57;
+$primary2: #f4ce14;
+$secondary1: #ee9972;
+$secondary2: #fbdabb;
+$secondary3: #edefee;
+$secondary4: #333333;
+$roundedCorners: 1rem;
+$custom-font-family: "Karla", sans-serif;
+$btn-border-radius: $roundedCorners;
+$card-bg: $secondary3;
+$card-border-width: 0;
+$card-border-radius: $roundedCorners;
+$card-border-color: transparent;
+$navbar-toggler-focus-width: 0.15rem;
+
+// Override Bootstrap's font variable
+$font-family-base: $custom-font-family;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/placeholders";
+@import "~bootstrap/scss/helpers";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "~bootstrap/scss/utilities/api";
+
+// 8. Add additional custom code here
+
+// scss-docs-end import-stack
+
+nav {
+  font-family: "Karla", sans-serif;
+  li .nav-link {
+    font-weight: 600;
+    &:hover {
+      color: $primary1;
+    }
+  }
+}
+
+.navbar-toggler {
+  border: none;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+header .navbar-nav .nav-link {
+  color: $secondary4;
+}
+
+.bgPrimary {
+  background-color: $primary1;
+}
+
+.bgSecondary {
+  background-color: $secondary4;
+}
+
+// Use the Bootstrap button mixin
+.custom-btn {
+  @include button-variant($primary2, $primary2, $secondary4);
+  $btn-font-family: "Karla", sans-serif;
+  font-weight: 600;
+  border-radius: $roundedCorners;
+}
+
+.mb-10 {
+  margin-bottom: 10rem;
+}
+
+.hero,
+.about {
+  margin: 0 auto;
+  h2 {
+    color: $primary2;
+    font-size: 4rem;
+    font-weight: 600;
+  }
+  h4 {
+    color: $secondary3;
+    font-size: 1.25rem;
+  }
+  p {
+    color: $secondary3;
+    line-height: 1.5;
+    max-width: 65ch;
+    word-wrap: break-word;
+  }
+  img {
+    border-radius: $roundedCorners;
+    width: 22rem;
+    height: 25rem;
+    position: absolute;
+    object-fit: cover;
+  }
+}
+
+.hero img {
+  top: 5rem;
+  right: 0;
+}
+
+.about {
+  img {
+    transition: all 0.3s ease-in-out;
+  }
+  img:hover {
+    scale: 1.025;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .firstImg {
+    top: 0rem;
+    right: 0;
+  }
+  .secondImg {
+    top: 5rem;
+    right: 10rem;
+  }
+}
+
+.highlights {
+  .card-body {
+    margin-top: 1rem;
+  }
+  .card-img-top {
+    max-height: 15rem;
+  }
+  h2 {
+    color: $secondary4;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  h5 {
+    margin-bottom: 0;
+  }
+  .btn-link {
+    text-decoration: none;
+    padding-left: 0;
+    color: $secondary4;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  p {
+    margin: 2.5rem 0;
+  }
+}
+
+.card {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.price {
+  color: #ee9972;
+  font-weight: 600;
+}
+
+.avatar-image {
+  width: 5rem;
+  height: 6rem;
+  object-fit: cover;
+}
+
+footer {
+  color: $secondary3;
+  h3 {
+    color: $primary2;
+    font-family: Karla, sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding-left: 1rem;
+  }
+  nav .nav-link {
+    color: $secondary3;
+    &:hover {
+      color: darken($secondary3, 20%);
+    }
+  }
+}

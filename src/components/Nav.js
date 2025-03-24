@@ -1,36 +1,60 @@
+import logo from "../assets/img/logo.jpg";
+import React from "react";
+import { Link } from "react-router-dom";
+
 function Nav() {
   return (
-    <nav className="nav nav-fill">
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          Home
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          About
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          Menu
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          Reservations
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          Order Online
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="">
-          Login
-        </a>
-      </li>
+    <nav className="navbar navbar-expand-lg">
+      <div className="container-fluid">
+        <div className="row justify-content-between align-items-center">
+          <Link
+            to="/"
+            className="navbar-brand col-sm-6 col-9 col-md-4 col-lg-3"
+          >
+            <img className="img-fluid" src={logo} alt="Little Lemon logo"></img>
+          </Link>
+          <button
+            className="navbar-toggler col-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse col-auto" id="navbarNav">
+            <ul className="navbar-nav w-100 d-flex justify-content-between">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/Menu">
+                  Menu
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/BookTable">
+                  Reservations
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/OrderOnline">
+                  Order Online
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Login">
+                  Login
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
