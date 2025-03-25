@@ -1,6 +1,11 @@
 import React from "react";
 
-const BookingSlot = ({ availableDates, availableTimes, formik, dispatch }) => {
+const BookingSlot = ({
+  availableDates,
+  availableTimes,
+  formik,
+  handleDateChange,
+}) => {
   return (
     <div
       className={`booking-slot ${
@@ -13,17 +18,12 @@ const BookingSlot = ({ availableDates, availableTimes, formik, dispatch }) => {
         <label htmlFor="res-date" className="form-label">
           Date:
         </label>
-
         <select
           id="res-date"
           name="date"
           className="form-select"
           value={formik.values.date}
-          onChange={(e) => {
-            formik.setFieldValue("date", e.target.value);
-            formik.handleChange(e);
-            dispatch({ type: "UPDATE_TIMES", payload: e.target.value });
-          }}
+          onChange={handleDateChange}
           onBlur={formik.handleBlur}
           required
           aria-required="true"
@@ -52,10 +52,7 @@ const BookingSlot = ({ availableDates, availableTimes, formik, dispatch }) => {
             name="time"
             className="form-select"
             value={formik.values.time}
-            onChange={(e) => {
-              formik.setFieldValue("time", e.target.value);
-              formik.handleChange(e);
-            }}
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             required
             aria-required="true"
@@ -64,11 +61,12 @@ const BookingSlot = ({ availableDates, availableTimes, formik, dispatch }) => {
             }
           >
             <option value="">Select a time</option>
-            {availableTimes.map((time, index) => (
-              <option key={index} value={time}>
-                {time}
-              </option>
-            ))}
+            {Array.isArray(availableTimes) &&
+              availableTimes.map((time, index) => (
+                <option key={index} value={time}>
+                  {time}
+                </option>
+              ))}
           </select>
           {formik.touched.time && formik.errors.time ? (
             <div className="text-danger">{formik.errors.time}</div>

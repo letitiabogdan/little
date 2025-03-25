@@ -1,49 +1,49 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import BookingSlot from "./BookingSlot";
+import { fetchData } from "../api";
 
-const availableTimesData = [
-  { date: "2025-03-01", time: "12:00", id: 1 },
-  { date: "2025-03-01", time: "13:00", id: 2 },
-  { date: "2025-03-01", time: "13:00", id: 3 },
-  { date: "2025-03-01", time: "14:00", id: 4 },
-  { date: "2025-03-01", time: "15:00", id: 5 },
-  { date: "2025-03-02", time: "15:00", id: 6 },
-  { date: "2025-03-02", time: "16:00", id: 7 },
-  { date: "2025-03-02", time: "17:00", id: 8 },
-  { date: "2025-03-02", time: "18:00", id: 9 },
-  { date: "2025-03-02", time: "19:00", id: 10 },
-];
-const uniqueDates = [...new Set(availableTimesData.map((item) => item.date))];
-
-const getTimesByDate = (date) => {
-  return availableTimesData
-    .filter((item) => item.date === date)
-    .map((item) => item.time);
+export const initializeTimes = async () => {
+  const today = new Date().toISOString().split("T")[0];
+  const times = await fetchData(today);
+  return Array.isArray(times) ? times : [];
 };
 
-const initializeTimes = () => {
-  return getTimesByDate(uniqueDates[0]);
-};
-
-const updateTimes = (state, action) => {
+export const updateTimes = async (state, action) => {
   switch (action.type) {
     case "UPDATE_TIMES":
-      return getTimesByDate(action.payload);
+      const times = await fetchData(action.payload);
+      return Array.isArray(times) ? times : [];
     default:
       return state;
   }
 };
 
 const BookingForm = () => {
-  const [availableTimes, dispatch] = useReducer(
-    updateTimes,
-    [],
-    initializeTimes
-  );
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [availableTimes, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "SET_TIMES":
+        return action.payload;
+      default:
+        return state;
+    }
+  }, []);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedValues, setSubmittedValues] = useState(null);
+  const [availableDates, setAvailableDates] = useState([]);
+
+  useEffect(() => {
+    const fetchInitialTimes = async () => {
+      const times = await initializeTimes();
+      dispatch({ type: "SET_TIMES", payload: times });
+    };
+    fetchInitialTimes();
+
+    // Set available dates to only today's date
+    const today = new Date().toISOString().split("T")[0];
+    setAvailableDates([today]);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -69,9 +69,11 @@ const BookingForm = () => {
     },
   });
 
-  const timeOptions = formik.values.date
-    ? getTimesByDate(formik.values.date)
-    : [];
+  const handleDateChange = async (e) => {
+    formik.handleChange(e);
+    const times = await fetchData(e.target.value);
+    dispatch({ type: "SET_TIMES", payload: times });
+  };
 
   return (
     <div className="container">
@@ -102,10 +104,10 @@ const BookingForm = () => {
           ) : (
             <form onSubmit={formik.handleSubmit}>
               <BookingSlot
-                availableDates={uniqueDates}
-                availableTimes={timeOptions}
+                availableDates={availableDates}
+                availableTimes={availableTimes}
                 formik={formik}
-                dispatch={dispatch}
+                handleDateChange={handleDateChange}
               ></BookingSlot>
 
               <div className="mb-3">
@@ -163,11 +165,7 @@ const BookingForm = () => {
                   <div className="text-danger">{formik.errors.occasion}</div>
                 ) : null}
               </div>
-              <button
-                type="submit"
-                className="btn custom-btn mt-3"
-                role="button"
-              >
+              <button type="submit" className="btn custom-btn mt-3">
                 Book Table
               </button>
             </form>
