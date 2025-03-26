@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import BookingSlot from "./BookingSlot";
@@ -21,6 +22,9 @@ export const updateTimes = async (state, action) => {
 };
 
 const BookingForm = ({ submitForm }) => {
+  const location = useLocation(); // Retrieve the state passed from the Link
+  const reservationData = location.state || {}; // Fallback to an empty object if no state is passed
+
   const [availableTimes, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "SET_TIMES":
@@ -46,10 +50,10 @@ const BookingForm = ({ submitForm }) => {
 
   const formik = useFormik({
     initialValues: {
-      date: "",
-      time: "",
-      guests: 1,
-      occasion: "",
+      date: reservationData.date || "",
+      time: reservationData.time || "",
+      guests: reservationData.guests || 1,
+      occasion: reservationData.occasion || "",
     },
     validationSchema: Yup.object({
       date: Yup.string().required("Date is required"),
@@ -63,7 +67,6 @@ const BookingForm = ({ submitForm }) => {
     onSubmit: (values) => {
       submitForm(values);
       setSubmittedValues(values);
-      formik.resetForm();
     },
   });
 

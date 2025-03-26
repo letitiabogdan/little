@@ -110,6 +110,14 @@ header .navbar-nav .nav-link {
   background-color: $secondary4;
 }
 
+.bgPrimaryImg {
+  background-image: url("./assets/img/pasta.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 15rem;
+}
+
 // Use the Bootstrap button mixin
 .custom-btn {
   @include button-variant($primary2, $primary2, $secondary4);
