@@ -9,9 +9,15 @@ import avatarImg3 from "../assets/img/lisa.png";
 import avatarImg4 from "../assets/img/jane.png";
 import aboutImg1 from "../assets/img/about1.png";
 import aboutImg2 from "../assets/img/about2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
+
+  const handleReserveClick = () => {
+    navigate("/booktable"); // Navigate to the BookingTable page
+  };
+
   return (
     <main>
       <div className="container-fluid bgPrimary mb-10">
@@ -25,7 +31,9 @@ function Main() {
               spices in a welcoming setting, ensuring an unforgettable culinary
               night out in warm surroundings.
             </p>
-            <button className="btn custom-btn">Reserve a table</button>
+            <button className="btn custom-btn" onClick={handleReserveClick}>
+              Reserve a table
+            </button>
           </div>
           <div className="col-md-6 d-none d-md-block">
             <img
