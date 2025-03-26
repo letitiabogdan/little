@@ -20,7 +20,7 @@ export const updateTimes = async (state, action) => {
   }
 };
 
-const BookingForm = () => {
+const BookingForm = ({ submitForm }) => {
   const [availableTimes, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "SET_TIMES":
@@ -29,7 +29,6 @@ const BookingForm = () => {
         return state;
     }
   }, []);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedValues, setSubmittedValues] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
 
@@ -62,8 +61,7 @@ const BookingForm = () => {
       occasion: Yup.string().required("Occasion is required"),
     }),
     onSubmit: (values) => {
-      console.log("Form data submitted:", values);
-      setIsSubmitted(true);
+      submitForm(values);
       setSubmittedValues(values);
       formik.resetForm();
     },
@@ -80,96 +78,73 @@ const BookingForm = () => {
       <div className="row justify-content-center">
         <div className="col-12 col-md-8">
           <h1>Book a Table</h1>
-          {isSubmitted ? (
-            <>
-              <div className="alert alert-success" role="alert">
-                Your booking has been submitted successfully!
-              </div>
-              <div className="col-12 col-md-8">
-                <h3>Submitted Details:</h3>
-                <p>
-                  <strong>Date:</strong> {submittedValues.date}
-                </p>
-                <p>
-                  <strong>Time:</strong> {submittedValues.time}
-                </p>
-                <p>
-                  <strong>Guests:</strong> {submittedValues.guests}
-                </p>
-                <p>
-                  <strong>Occasion:</strong> {submittedValues.occasion}
-                </p>
-              </div>
-            </>
-          ) : (
-            <form onSubmit={formik.handleSubmit}>
-              <BookingSlot
-                availableDates={availableDates}
-                availableTimes={availableTimes}
-                formik={formik}
-                handleDateChange={handleDateChange}
-              ></BookingSlot>
+          <form onSubmit={formik.handleSubmit}>
+            <BookingSlot
+              availableDates={availableDates}
+              availableTimes={availableTimes}
+              formik={formik}
+              handleDateChange={handleDateChange}
+            ></BookingSlot>
 
-              <div className="mb-3">
-                <label htmlFor="guests" className="form-label">
-                  Number of Guests:
-                </label>
-                <input
-                  type="number"
-                  id="guests"
-                  className="form-control"
-                  name="guests"
-                  value={formik.values.guests}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  min="1"
-                  max="10"
-                  required
-                  aria-required="true"
-                  aria-invalid={
-                    formik.touched.guests && formik.errors.guests
-                      ? "true"
-                      : "false"
-                  }
-                />
-                {formik.touched.guests && formik.errors.guests ? (
-                  <div className="text-danger">{formik.errors.guests}</div>
-                ) : null}
-              </div>
-              <div className="mb-3">
-                <label htmlFor="occasion" className="form-label">
-                  Occasion:
-                </label>
-                <select
-                  id="occasion"
-                  className="form-select"
-                  name="occasion"
-                  value={formik.values.occasion}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  required
-                  aria-required="true"
-                  aria-invalid={
-                    formik.touched.occasion && formik.errors.occasion
-                      ? "true"
-                      : "false"
-                  }
-                >
-                  <option value="">Select an occasion</option>
-                  <option value="birthday">Birthday</option>
-                  <option value="anniversary">Anniversary</option>
-                  <option value="engagement">Engagement</option>
-                  <option value="other">Other</option>
-                </select>
-                {formik.touched.occasion && formik.errors.occasion ? (
-                  <div className="text-danger">{formik.errors.occasion}</div>
-                ) : null}
-              </div>
-              <button type="submit" className="btn custom-btn mt-3">
-                Book Table
-              </button>
-            </form>
-          )}
+            <div className="mb-3">
+              <label htmlFor="guests" className="form-label">
+                Number of Guests:
+              </label>
+              <input
+                type="number"
+                id="guests"
+                className="form-control"
+                name="guests"
+                value={formik.values.guests}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                min="1"
+                max="10"
+                required
+                aria-required="true"
+                aria-invalid={
+                  formik.touched.guests && formik.errors.guests
+                    ? "true"
+                    : "false"
+                }
+              />
+              {formik.touched.guests && formik.errors.guests ? (
+                <div className="text-danger">{formik.errors.guests}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="occasion" className="form-label">
+                Occasion:
+              </label>
+              <select
+                id="occasion"
+                className="form-select"
+                name="occasion"
+                value={formik.values.occasion}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+                aria-required="true"
+                aria-invalid={
+                  formik.touched.occasion && formik.errors.occasion
+                    ? "true"
+                    : "false"
+                }
+              >
+                <option value="">Select an occasion</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="engagement">Engagement</option>
+                <option value="other">Other</option>
+              </select>
+              {formik.touched.occasion && formik.errors.occasion ? (
+                <div className="text-danger">{formik.errors.occasion}</div>
+              ) : null}
+            </div>
+            <button type="submit" className="btn custom-btn mt-3">
+              Book Table
+            </button>
+          </form>
         </div>
       </div>
     </div>

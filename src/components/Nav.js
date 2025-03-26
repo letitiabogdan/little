@@ -32,22 +32,22 @@ function Nav() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" to="/Menu">
+                <Link className="nav-link active" to="/menu">
                   Menu
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/BookTable">
+                <Link className="nav-link" to="/booktable">
                   Reservations
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/OrderOnline">
+                <Link className="nav-link" to="/orderonline">
                   Order Online
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Login">
+                <Link className="nav-link" to="/login">
                   Login
                 </Link>
               </li>
