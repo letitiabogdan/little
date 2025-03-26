@@ -67,6 +67,15 @@ describe("BookingForm Component", () => {
         guests: 4,
         occasion: "birthday",
       });
+      // Verify that the data is saved in localStorage
+      expect(localStorage.getItem("reservationData")).toEqual(
+        JSON.stringify({
+          date: "2025-03-26",
+          time: "18:00",
+          guests: 4,
+          occasion: "birthday",
+        })
+      );
     });
   });
 

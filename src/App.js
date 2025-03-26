@@ -16,8 +16,9 @@ function App() {
   const navigate = useNavigate();
 
   const submitForm = (formData) => {
-    const isSuccess = submitAPI(formData);    
+    const isSuccess = submitAPI(formData);
     if (isSuccess) {
+      localStorage.setItem("reservationData", JSON.stringify(formData));
       navigate("/confirmation", { state: formData });
     }
   };

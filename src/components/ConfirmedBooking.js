@@ -3,7 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 
 const ConfirmedBooking = () => {
   const location = useLocation();
-  const { date, time, guests, occasion } = location.state || {};
+  const reservationData =
+    location.state || JSON.parse(localStorage.getItem("reservationData")) || {};
+
+  const { date, time, guests, occasion } = reservationData;
   return (
     <div className="container">
       <div className="row justify-content-center">
