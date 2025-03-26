@@ -4,7 +4,7 @@ const BookTable = (props) => {
   return (
     <>
       <div className="container-fluid bgPrimaryImg py-5 mb-5"></div>
-      <BookingForm submitForm={props.submitForm}></BookingForm>;
+      <BookingForm submitForm={props.submitForm}></BookingForm>
     </>
   );
 };

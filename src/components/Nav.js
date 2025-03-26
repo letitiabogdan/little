@@ -27,12 +27,12 @@ function Nav() {
           <div className="collapse navbar-collapse col-auto" id="navbarNav">
             <ul className="navbar-nav w-100 d-flex justify-content-between">
               <li className="nav-item">
-                <Link className="nav-link active" to="/">
+                <Link className="nav-link" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" to="/menu">
+                <Link className="nav-link" to="/menu">
                   Menu
                 </Link>
               </li>

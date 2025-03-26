@@ -12,7 +12,7 @@ export const fetchData = function (date) {
   let dateObj = new Date(date);
   let random = seededRandom(dateObj.getDate());
 
-  for (let i = 17; i <= 23; i++) {
+  for (let i = 1; i <= 11; i++) {
     if (random() < 0.5) {
       result.push(i + ":00");
     }

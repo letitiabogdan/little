@@ -110,17 +110,48 @@ header .navbar-nav .nav-link {
   background-color: $secondary4;
 }
 
+// Add overlay for better text readability
 .bgPrimaryImg {
-  background-image: url("./assets/img/pasta.jpg");
+  position: relative;
+  background-image: url("./assets/img/dish.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 15rem;
+
+  // Add the overlay
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // Semi-transparent black overlay
+    z-index: 1;
+  }
+
+  // Ensure text is above the overlay
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.text-shadow-light {
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6); // Light shadow for dark backgrounds
 }
 
 // Use the Bootstrap button mixin
 .custom-btn {
   @include button-variant($primary2, $primary2, $secondary4);
+  $btn-font-family: "Karla", sans-serif;
+  font-weight: 600;
+  border-radius: $roundedCorners;
+}
+
+.btn-outline-custom {
+  @include button-outline-variant($primary1, $primary2);
   $btn-font-family: "Karla", sans-serif;
   font-weight: 600;
   border-radius: $roundedCorners;
@@ -249,5 +280,46 @@ footer {
   min-height: 100vh;
   main {
     flex: 1;
+  }
+}
+
+.confirmation-card {
+  .card {
+    background-color: #ffffff;
+    border-radius: $roundedCorners;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    font-size: 2.5rem; //
+    color: $primary1;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: $primary1;
+  }
+
+  p {
+    color: $primary1;
+  }
+
+  .underlined {
+    border-bottom: 1px solid $secondary1;
+    padding-top: 18px;
+  }
+
+  .btn-outline-secondary {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: $roundedCorners;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
   }
 }

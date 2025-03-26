@@ -45,7 +45,7 @@ const BookingSlot = ({
       {formik.values.date && (
         <div className="mb-3">
           <label htmlFor="res-time" className="form-label">
-            Time:
+            Time (PM):
           </label>
           <select
             id="res-time"
